@@ -11,7 +11,8 @@ Processa URLs de vagas acumuladas em `data/pipeline.md`. O candidato adiciona UR
    c. Se a URL não for acessível → marcar como `- [!]` com nota e continuar
    d. **Executar auto-pipeline completa**: Avaliação A-F → Report .md → PDF (se score >= 3.0) → Tracker
    e. **Mover de "Pendentes" para "Processadas"**: `- [x] #NNN | URL | Empresa | Vaga | Score/5 | PDF ✅/❌`
-3. **Se houver 3+ URLs pendentes**, lançar agentes em paralelo (Agent tool com `run_in_background`) para maximizar velocidade.
+3. **Se houver 3+ URLs pendentes**, lançar agentes em paralelo apenas para etapas sem Playwright (ex.: organização, WebSearch/WebFetch).
+   Se a extração exigir Playwright, processar serialmente (1 vaga por vez) para evitar conflito de sessão.
 4. **Ao terminar**, mostrar tabela resumo:
 
 ```
